@@ -90,7 +90,9 @@ $(document).ready(function() {
 
       result.forEach(function(job) {
         var timeStamp = new Date(job.date);
-        $row = $('<tr><td>' + job.printer_name + '</td><td>' + job.label_name + '</td><td data-order="' + timeStamp.getTime() + '">' + (timeStamp.toISOString()) + '</td><td>' + (typeof job.error !== "undefined" ? (JSON.stringify(job.error)) : "") + '</td><td><div class="btn-group" role="group"><button class="btn btn-secondary review"><i class="fas fa-fw fa-search"></i></button><button class="btn btn-primary print"><i class="fas fa-fw fa-print"></i></button></div></td></tr>');
+        $row = $('<tr><td>' + job.printer_name + '</td><td>' + job.label_name + '</td><td data-order="' + timeStamp.getTime() + '">' + (timeStamp.toISOString()) + '</td><td>' + 
+        JSON.stringify(job.data) + 
+        (typeof job.error !== "undefined" ? (JSON.stringify(job.error)) : "") + '</td><td><div class="btn-group" role="group"><button class="btn btn-secondary review"><i class="fas fa-fw fa-search"></i></button><button class="btn btn-primary print"><i class="fas fa-fw fa-print"></i></button></div></td></tr>');
         $row.data("job", job);
         $row.find('.print').click(function() {
           $.ajax({

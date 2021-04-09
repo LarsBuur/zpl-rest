@@ -37,6 +37,12 @@ rest.use(session({
   }
 }))
 
+String.prototype.replaceAll = function (search, replacement) {
+  let target = this;
+  return target.split(search).join(replacement);
+};
+
+
 // JSON
 rest.use(express.json());
 
@@ -297,6 +303,12 @@ rest.post('/rest/print', function(req, res) {
   job.zpl = label.zpl;
   for (key in job.data) {
     job.zpl = job.zpl.replace("${" + key + "}", job.data[key])
+    job.zpl = job.zpl.replaceAll("æ", '_7B');
+    job.zpl = job.zpl.replaceAll("ø", '_7C');
+    job.zpl = job.zpl.replaceAll("å", '_7D');
+    job.zpl = job.zpl.replaceAll("Æ", '_5B');
+    job.zpl = job.zpl.replaceAll("Ø", '_5C');
+    job.zpl = job.zpl.replaceAll("Å", '_5D');
   }
 
   var mustache_reg = /{{(.*)}}/gm;
